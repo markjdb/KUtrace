@@ -1,12 +1,7 @@
-ccflags-y := -march=native
-CFLAGS_kutrace_mod.o = -march=native
+KMOD= kutrace
 
-obj-m += kutrace_mod.o
+SRCS= kutrace_mod.c
 
-all:
-	make -C /lib/modules/$(shell uname -r)/build M=$(PWD) modules
+CFLAGS+= -DKUTRACE
 
-clean:
-	make -C /lib/modules/$(shell uname -r)/build M=$(PWD) clean
-
-
+.include <bsd.kmod.mk>
